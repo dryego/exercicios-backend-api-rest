@@ -4,21 +4,33 @@
 
 ## Lista de convidados
 
-Neste exercício deveremos criar o back-end de um sistema para controle de convidados de evento. Este controle de convidados deverá ser executado em um servidor nodejs e deverá ser acessado através do endereço http://localhost:3000. O sistema deverá possuir uma lista de nomes dos convidados, e funcionalidades para poder: **consultar a lista** de convidados **inteira**, **consultar** se **um nome específico** existe na lista, **adicionar** um nome na lista e por fim, **remover** um nome da lista de convidados. Além de solicitar essas funcionalidades, foi exigido que este serviço back-end utilize o **padrão REST** o mais fielmente possível.
+Neste exercício deveremos criar o back-end de um sistema para controle de convidados de evento. Este controle de convidados deverá ser executado em um servidor nodejs e deverá ser acessado através do endereço http://localhost:3000.
+
+O sistema deverá possuir uma lista de nomes dos convidados, e funcionalidades para poder: 
+- **consultar a lista** de convidados **inteira**
+
+- **consultar** se **um nome específico** existe na lista
+
+- **adicionar** um nome na lista de convidados
+
+- **remover** um nome da lista de convidados
+
+Além de solicitar essas funcionalidades, foi exigido que este serviço back-end utilize o **padrão REST** o mais fielmente possível.
 
 A seguir, detalharemos cada uma das funcionalidades necessárias, uma a uma, que deverão todas estar no mesmo script do servidor.
 
-Todas as funcionalidades deverão estar disponíveis em um recurso chamado "convidados" que deverá ser acessado através do endereço http://localhost:3000/convidados.
+Todas as funcionalidades deverão estar disponíveis em um recurso chamado **convidados** que deverá ser acessado através do endereço `http://localhost:3000/convidados`.
 
-**a) Consulta a lista inteira de convidados**
+**a) Consultar a lista inteira de convidados**
 
-A primeira funcionalidade deverá ser aquela através da qual será possível consultar a lista completa de convidados.
-Esta funcionalidade deverá utilizar o método (verbo) **GET**. Ao ser requisitada, esta funcionalidade deverá retornar no body do response um array de strings, onde cada item é um nome de convidado. Por enquanto esta funcionalidade não deverá receber parâmetros de qualquer tipo.
+Esta funcionalidade deverá utilizar o método (verbo) **GET**. Ao ser requisitada, esta funcionalidade deverá retornar no body (corpo) do response (resposta) um array de strings, onde cada item é um nome de convidado.
+
+Por enquanto esta funcionalidade não deverá receber parâmetros de qualquer tipo.
 
 Caso considere necessário, crie um array inicial com quaisquer nomes para poder testar a funcionalidade.
 
 **Exemplo:**
-Caso seja criado um array inicial no servidor conforme abaixo
+Caso seja criado um array inicial no servidor conforme abaixo:
 
 ```javascript
 const convidados = [
@@ -33,7 +45,7 @@ const convidados = [
 
 Ao requisitar esta funcionalidade, deverá ser retornado:
 
-```
+```javascript
 [
   "Carlos",
   "Amanda",
@@ -44,11 +56,13 @@ Ao requisitar esta funcionalidade, deverá ser retornado:
 ]
 ```
 
-**b) Consulta se existe um nome específico na lista de convidados**
+**b) Consultar se existe um nome específico na lista de convidados**
 
-Agora vamos adicionar uma funcionalidade à anterior de consulta. Adicionaremos a possibilidade de especificar um nome através de um parâmetro query chamado **nome** e deverá ser retornado se o nome existe ou não na lista. Portanto neste passo apenas alteraremos à funcionalidade anterior que é acessada através do método (verbo) **GET**, através do endereço http://localhost:3000/convidados.
+Agora vamos adicionar uma funcionalidade à anterior de consulta. Adicionaremos a possibilidade de especificar um nome através de um parâmetro query chamado **nome** e deverá ser retornado se o nome existe ou não na lista.
 
-Portanto quando um valor for enviado na propriedade **nome** do tipo query, deverá ser retornado um objeto com apenas uma propriedade chamada **mensagem** que deverá receber uma string informando se o nome existe na lista ou não. Caso não seja fornecido valor à propriedade **nome** deverá ser retornado o array completo da lista de convidados, conforme funcionalidade anterior da letra **a)**.
+Portanto neste passo apenas alteraremos à funcionalidade anterior que é acessada através do método (verbo) **GET**, através do endereço `http://localhost:3000/convidados`.
+
+Portanto quando um valor for enviado na propriedade **nome** do tipo query, deverá ser retornado um objeto com apenas uma propriedade chamada **mensagem** que deverá receber uma string informando se o nome existe na lista ou não. Caso não seja fornecido valor à propriedade **nome** deverá ser retornado o array completo da lista de convidados, conforme funcionalidade da letra **a)**.
 
 **Exemplos:**
 
@@ -65,17 +79,17 @@ const convidados = [
 ]
 ```
 
-Ao requisitar o recurso **convidados** com GET http://localhost:3000/convidados?nome=Renato, deverá ser retornado o seguinte objeto:
+Ao requisitar o recurso **convidados** com **GET** `http://localhost:3000/convidados?nome=Renato`, deverá ser retornado o seguinte objeto:
 
-```
+```json
 {
   "mensagem": "O convidado buscado não está presente na lista."
 }
 ```
 
-E ao requisitar o recurso **convidados** com GET http://localhost:3000/convidados?nome=Carlos, deverá ser retornado o seguinte objeto:
+E ao requisitar o recurso **convidados** com **GET** `http://localhost:3000/convidados?nome=Carlos`, deverá ser retornado o seguinte objeto:
 
-```
+```json
 {
   "mensagem": "Convidado presente."
 }
@@ -83,15 +97,13 @@ E ao requisitar o recurso **convidados** com GET http://localhost:3000/convidado
 
 **c) Adicionar um nome na lista de convidados**
 
-Deverá ser criada também uma funcionalidade para adicionar nomes à lista. Para isto, deverá ser utilizado o método (verbo) **POST** através do endereço http://localhost:3000/convidados.
+Deverá ser criada também uma funcionalidade para adicionar nomes à lista. Para isto, deverá ser utilizado o método (verbo) **POST** através do endereço `http://localhost:3000/convidados`.
 
-O body da requisição (request) deverá ser um objeto JSON onde existirá apenas uma propriedade chamada **nome**, a qual deverá possuir como valor, uma string que será o nome do novo convidado a ser adicionado na lista.
+O body (corpo) da requisição (request) deverá ser um objeto JSON onde existirá apenas uma propriedade chamada **nome**, a qual deverá possuir como valor, uma string que será o nome do novo convidado a ser adicionado na lista.
 
-Caso já exista na lista um nome idêntico ao fornecido pelo request, deverá ser retornada uma resposta com o body preenchido com um objeto com apenas uma propriedade **mensagem** que terá como valor uma string que é a mensagem informando que o convidado já existe na lista.
+Caso já exista na lista um nome idêntico ao fornecido pela requisição (request), deverá ser retornada uma resposta com o body preenchido com um objeto com apenas uma propriedade **mensagem** que terá como valor uma string que é a mensagem informando que o convidado já existe na lista.
 
-Caso o nome do convidado ainda não exista, após ser adicionado na lista deverá retornar uma resposta com um objeto JSON no body onde haverá apenas uma propriedade **mensagem** com uma mensagem dizendo que o convidado foi adicionado.
-
-**Exemplos:**
+**Exemplo:**
 
 Caso seja criado um array inicial no servidor conforme abaixo
 
@@ -106,9 +118,9 @@ const convidados = [
 ]
 ```
 
-Ao enviar uma requisição POST http://localhost:3000/convidados com o objeto a seguir no conteúdo:
+Ao enviar uma requisição **POST** `http://localhost:3000/convidados` com o objeto a seguir no body (corpo) da requisição:
 
-```
+```json
 {
 	"nome": "Amanda"
 }
@@ -116,23 +128,27 @@ Ao enviar uma requisição POST http://localhost:3000/convidados com o objeto a 
 
 Deverá ser retornada uma mensagem com o seguinte objeto no conteúdo JSON no body:
 
-```
+```json
 {
     "mensagem": "O nome do convidado a ser adicionado já existe na lista. Caso queria adicionar outro convidado de mesmo nome, favor fornecer o sobrenome também."
 }
 ```
 
-Se for enviada uma requisição POST http://localhost:3000/convidados com um nome que ainda não exista na lista, conforme a seguir:
+Caso o nome do convidado ainda não exista, após ser adicionado na lista deverá retornar uma resposta com um objeto **JSON** no body (corpo) onde haverá apenas uma propriedade **mensagem** com uma mensagem dizendo que o convidado foi adicionado.
 
-```
+**Exemplo:**
+
+Se for enviada uma requisição **POST** `http://localhost:3000/convidados` com um nome que ainda não exista na lista, conforme a seguir:
+
+```json
 {
 	"nome": "Gabriel"
 }
 ```
 
-Deverá ser retornada uma resposta com o seguinte objeto JSON no body do response:
+Deverá ser retornada uma resposta com o seguinte objeto **JSON** no body (corpo) da resposta (response):
 
-```
+```json
 {
     "mensagem": "Convidado adicionado."
 }
@@ -140,17 +156,15 @@ Deverá ser retornada uma resposta com o seguinte objeto JSON no body do respons
 
 **d) Remover um nome da lista de convidados**
 
-Para finalizar, deve ser criada a funcionalidade para remover convidados da lista. Para isto, deverá ser utilizado o método (verbo) **DELETE** através do endereço http://localhost:3000/convidados.
+Para finalizar, deve ser criada a funcionalidade para remover convidados da lista. Para isto, deverá ser utilizado o método (verbo) **DELETE** através do endereço `http://localhost:3000/convidados`.
 
 O nome a ser removido deverá ser fornecido através de um parâmetro de URL do tipo path (params) chamado **nome**.
 
-O body da requisição (request) não deverá possuir qualquer conteúdo e se possuir, deverá ser ignorado.
+O body (corpo) da requisição (request) não deverá possuir qualquer conteúdo e se possuir, deverá ser ignorado.
 
 Caso não exista um convidado na lista com o nome enviado pela requisição, deverá ser retornada uma resposta com objeto json com a propriedade **mensagem** dizendo que não há convidado na lista com aquele nome e que portanto nenhum convidado foi removido.
 
-Caso exista na lista um convidado com o exato nome enviado pela requisição, a string correspondente deverá ser removida do array, e em seguida o servidor deverá retornar uma mensagem com objeto json com a propriedade **mensagem** com uma string informando que o convidado foi removido.
-
-**Exemplos:**
+**Exemplo:**
 
 Caso seja criado um array inicial no servidor conforme abaixo
 
@@ -165,21 +179,25 @@ const convidados = [
 ]
 ```
 
-Ao enviar uma requisição DELETE http://localhost:3000/convidados/Fernando
+Ao enviar uma requisição **DELETE** `http://localhost:3000/convidados/Fernando`
 
-Deverá ser retornada uma mensagem com o seguinte objeto no conteúdo JSON no body:
+Deverá ser retornada uma mensagem com o seguinte objeto no conteúdo JSON no body (corpo):
 
-```
+```json
 {
     "mensagem": "O nome do convidado a ser removido não existe na lista. Nenhum convidado foi removido."
 }
 ```
 
-Se for enviada uma requisição DELETE http://localhost:3000/convidados/Juliana
+Caso exista na lista um convidado com o exato nome enviado pela requisição, a string correspondente deverá ser removida do array, e em seguida o servidor deverá retornar uma mensagem com objeto json com a propriedade **mensagem** com uma string informando que o convidado foi removido.
 
-Deverá ser retornada uma resposta com o seguinte objeto JSON no body do response:
+**Exemplo:**
 
-```
+Se for enviada uma requisição **DELETE** `http://localhost:3000/convidados/Juliana`
+
+Deverá ser retornada uma resposta com o seguinte objeto **JSON** no body (corpo) da resposta (response):
+
+```json
 {
     "mensagem": "Convidado removido."
 }
