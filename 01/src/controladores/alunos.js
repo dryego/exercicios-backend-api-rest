@@ -55,9 +55,26 @@ const cadastraAluno = (req, res) => {
 
 };
 
+const deletarAluno = (req, res) => {
+    const { id } = req.params;
+
+    const aluno = alunos.find((aluno) => {
+        return aluno.id === Number(id);
+    });
+    if (!aluno) {
+        res.status(404).json({ mensagem: 'Aluno não encontrado.' })
+    }
+
+    alunos = alunos.filter((aluno) => {
+        return aluno.id !== Number(id);
+    });
+
+    return res.status(200).send(aluno) //res.status(204).json({ aluno });
+}
 
 module.exports = {
     exibirAlunos,
     buscarAlunoId,
-    cadastraAluno
+    cadastraAluno,
+    deletarAluno
 };
