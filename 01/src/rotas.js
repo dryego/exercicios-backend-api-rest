@@ -4,9 +4,8 @@ const { exibirAlunos, buscarAlunoId, cadastraAluno, deletarAluno } = require('./
 
 const rotas = express();
 
-//rotas.use(validarSenha);
-
 rotas.get('/', exibirAlunos);
+rotas.use(validarSenha);
 rotas.get('/aluno/:id', buscarAlunoId);
 rotas.post('/', cadastraAluno);
 rotas.delete('/:id', deletarAluno);
